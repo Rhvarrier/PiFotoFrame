@@ -19,7 +19,7 @@ If you plan to build this from source, it is strongly recommended to cross compi
 This is by far the most difficult process but as stated earlier, you only need to do this once and it will be quite useful if you want to develop Qt projects for Pi.
 Setting up Raspberry Pi by installing the distros and configuring the network options is out-of-scope for this tutorial.
 Most tutorials online for cross-compiling Qt5 for Pi are either outdated or do not support Pi zero (due to its hardware limitations). I have tried the following tutorials and they have not been fruitful :
--	[The Official tutorial](https://wiki.qt.io/RaspberryPi2EGLFS), is pretty outdated 
+-	The [official tutorial](https://wiki.qt.io/RaspberryPi2EGLFS), is pretty outdated 
 -	A [well written tutorial](https://mechatronicsblog.com/cross-compile-and-deploy-qt-5-12-for-raspberry-pi/), that is fairly up to date but has  not worked for me
 -	A good [forum post](https://www.raspberrypi.org/forums/viewtopic.php?t=204778)
 
@@ -36,7 +36,7 @@ sudo apt-get install libudev-dev libinput-dev libts-dev libxcb-xinerama0-dev lib
 ```
 
 2. Create an empty workspace directory and copy the script into it. 
-3. Add the [sysroot-relativelinks](wget https://raw.githubusercontent.com/Kukkimonsuta/rpi-buildqt/master/scripts/utils/sysroot-relativelinks.py) tool into the directory
+3. Add the [sysroot-relativelinks](https://raw.githubusercontent.com/Kukkimonsuta/rpi-buildqt/master/scripts/utils/sysroot-relativelinks.py) tool into the directory
 4. Edit the script :
 ```
 PI_USER="dietpi" #User name of your raspberry pi
