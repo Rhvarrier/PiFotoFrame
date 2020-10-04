@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>WeatherWidget.qml</file>
+        <file>test_img.jpg</file>
+        <file>WeatherIcon.qml</file>
+        <file>TempMaxMin.qml</file>
+        <file>TextContainer.qml</file>
+    </qresource>
+    <qresource prefix="/weather_icons">
+        <file>weather_icons/Clear.png</file>
+        <file>weather_icons/Cloudy.png</file>
+        <file>weather_icons/Rain.png</file>
+        <file>weather_icons/Shower.png</file>
+        <file>weather_icons/Snow.png</file>
+        <file>weather_icons/Sunny_Cloudy.png</file>
+    </qresource>
+</RCC>
