@@ -69,7 +69,7 @@ The template configuration file ```Data/PiFotoFrame.conf.template``` must be ren
 
 ***You don't need to restart the program after editing the configuration file***
 
-##TODO
+## TODO
 1. Auto rotate the images before displaying
 2. Automatically adjust the monitor switch on/off times according to DST
 3. Add option to competely disable the weather widgets from configurations
