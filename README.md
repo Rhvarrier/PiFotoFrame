@@ -1,3 +1,8 @@
+
+<p align="center">
+<img width="100" height="100" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/logo.png">
+</p>
+
 # PiFotoFrame
 A neat Qt5 based photo frame application that runs on Pi Zero W. This application does not need a desktop enviroment
 
@@ -15,7 +20,7 @@ If you plan to build this from source, it is strongly recommended to cross compi
 1. Compile the cross compiler on your host machine as the [official cross-compiler](https://github.com/raspberrypi/tools) is out-dated. A good way to do this is to use [crosstool-NG](https://crosstool-ng.github.io/)
 2. Cross compile Qt5 (see section below for more details)
 3. Configure QtCreator for cross compilation: [Tutorial](https://www.olimex.com/forum/index.php?topic=3826.0)
-####Cross-compiling Qt5 with EFGLS support for Raspberry Pi Zero W
+#### Cross-compiling Qt5 with EFGLS support for Raspberry Pi Zero W
 This is by far the most difficult process but as stated earlier, you only need to do this once and it will be quite useful if you want to develop Qt projects for Pi.
 Setting up Raspberry Pi by installing the distros and configuring the network options is out-of-scope for this tutorial.
 Most tutorials online for cross-compiling Qt5 for Pi are either outdated or do not support Pi zero (due to its hardware limitations). I have tried the following tutorials and they have not been fruitful :
@@ -25,7 +30,7 @@ Most tutorials online for cross-compiling Qt5 for Pi are either outdated or do n
 
 I have included a simple bash script (```build_qt.sh```)that will compile and install QT from source on to you Pi via ssh
 
-**Here are the steps**
+**Setps to cross compile Qt5**
 1. Install the following dependencies on Pi : 
 ```
 sudo apt-get build-dep qt5-qmake
@@ -73,4 +78,4 @@ The template configuration file ```Data/PiFotoFrame.conf.template``` must be ren
 1. Auto rotate the images before displaying
 2. Automatically adjust the monitor switch on/off times according to DST
 3. Add option to competely disable the weather widgets from configurations
-4. And as always clean up the code.
+4. Add webserver to adjust configurations from browser
