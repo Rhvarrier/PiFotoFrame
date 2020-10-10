@@ -1,0 +1,17 @@
+# Property File from PifotoFrame
+
+[Weather]
+Weather.location.url=http://ip-api.com/json/
+Weather.provider.url=http://api.openweathermap.org/data/2.5/onecall
+Weather.provider.api_key=<ADD API KEY>
+Weather.update.period_in_min=60
+Weather.enable=true
+
+[Photo]
+Photo.location.root_path = <ADD LOCATION TO ROOT DIRECTORY CONTAINING PHOTOS IN SUBDIRECTORY>
+Photo.location.dir_names = <ADD LIST OF SUBDIRECTORIES>
+
+[MonitorControl]
+MonitorControl.auto_power_down=true
+MonitorControl.switch_on_time="07:00"
+MonitorControl.switch_off_time="22:00"
