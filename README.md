@@ -1,6 +1,6 @@
 
 <p align="center">
-<img width="300" height="300" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/logo.png">
+<img width="200" height="200" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/logo.png">
 </p>
 
 # PiFotoFrame
