@@ -22,6 +22,9 @@ ApplicationWindow {
             mainImage.source = "file:" + img_path
         }
     }
+//    RowLayout
+//    {
+//        spacing: 0
         Rectangle{
             Image {
                 id: mainImage
@@ -30,8 +33,6 @@ ApplicationWindow {
                 sourceSize.height: Screen.height
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectFit
-                cache: false
-                autoTransform: true
             }
             color: "grey"
             anchors.right: parent.right
@@ -46,4 +47,6 @@ ApplicationWindow {
             height: parent.height
              anchors.left: parent.left
         }
+//    }
+
 }
