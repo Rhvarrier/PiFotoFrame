@@ -16,7 +16,7 @@ A neat Qt5 based photo frame application that runs on Pi Zero W. This applicatio
 - Automatically powers down/up the connected monitor (at configurable times)
 
 <p align="center">
-<img width="400" height="400" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/screenshot.png">
+<img width="900" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/screenshot.png">
 </p>
 
 ### Building from source
