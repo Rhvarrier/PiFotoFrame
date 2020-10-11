@@ -1,6 +1,6 @@
 
 <p align="center">
-<img width="100" height="100" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/logo.png">
+<img width="200" height="200" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/logo.png">
 </p>
 
 # PiFotoFrame
@@ -14,6 +14,10 @@ A neat Qt5 based photo frame application that runs on Pi Zero W. This applicatio
 - Loads images from external drive
 - Fully configurable using the .conf file (see section below)
 - Automatically powers down/up the connected monitor (at configurable times)
+
+<p align="center">
+<img width="400" height="400" src="https://github.com/Rhvarrier/PiFotoFrame/blob/main/screenshot.png">
+</p>
 
 ### Building from source
 If you plan to build this from source, it is strongly recommended to cross compile it using QtCreator. Eventhough the initial setup may seem difficult, it will be fruitful in the future. There are numerous tutorials online on how to set up the enviroment, however to summarize you should:
