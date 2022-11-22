@@ -1,4 +1,4 @@
-#include <Photo.hpp>
+﻿#include <Photo.hpp>
 #include <Globals.hpp>
 #include <QDir>
 #include <QDebug>
@@ -35,10 +35,11 @@ Photo::Photo(QObject *parent) :
     initDir();
     initTimer();
     update();
-    connect(ConfigFile::getInstance(), &ConfigFile::fileModified, [=](){
+    connect(&ConfigFile::GetInstance(), &ConfigFile::fileModified, this, [=](){
         initProperties();
         initDir();
         initTimer();
+        qDebug() << "Config File modified";
     });
 }
 
@@ -67,12 +68,14 @@ void Photo::initTimer()
 
 void Photo::initDir()
 {
+    
     QStringList filters;
     foreach (QByteArray format, QImageReader::supportedImageFormats())
         filters += "*." + format;
     QStringList temp_list;
     foreach(QString dir,dir_names)
     {
+        qDebug() << root_path + "/" + dir;
         QDir photo_dir(root_path + "/" + dir);
         if (!photo_dir.exists())
         {
@@ -91,7 +94,7 @@ void Photo::update()
     int rand_index = 0;
     rand_index = QRandomGenerator::global()->bounded(0, _photo_file_paths.size());
     QString path = _photo_file_paths[rand_index];
-
+    
     if (QFileInfo::exists(path) && QFileInfo(path).isFile())
     {
         emit updateImage(path);

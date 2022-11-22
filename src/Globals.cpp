@@ -1,4 +1,4 @@
-#include <Globals.hpp>
+﻿#include <Globals.hpp>
 #include <QCoreApplication>
 #include <QSettings>
 #include <QDateTime>
@@ -6,59 +6,54 @@
 #include <QProcess>
 #include <Weather.hpp>
 
-ConfigFile* ConfigFile::_me = nullptr;
+
 QString ConfigFile::FILE_PATH = QString::Null();
 namespace
 {
  bool auto_powder_down = true;
 }
 
-ConfigFile *ConfigFile::getInstance()
+ConfigFile& ConfigFile::GetInstance()
 {
-    if (!_me)
-    {
-        _me = new ConfigFile();
-    }
-    return _me;
+    static ConfigFile Instance;
+    return Instance;
 }
 
 ConfigFile::ConfigFile(QObject* parent)
-    :QObject(parent)
+    :QObject(parent),
+      m_oConfigFileWatcher(this)
 
 {
-    QFileSystemWatcher config_file_watcher(this);
-    config_file_watcher.addPath(ConfigFile::FILE_PATH);
-    connect(&config_file_watcher, &QFileSystemWatcher::fileChanged, [=](){emit fileModified();qDebug() << "config file modified";});
+    //qDebug() << "Add config file " << ConfigFile::FILE_PATH;
+    m_oConfigFileWatcher.addPath(ConfigFile::FILE_PATH);
+    connect(&m_oConfigFileWatcher, &QFileSystemWatcher::fileChanged, this, &ConfigFile::fileModified);
 }
 
-MonitorController* MonitorController::_me = nullptr;
-MonitorController *MonitorController::getInstance()
+
+MonitorController& MonitorController::GetInstance()
 {
-    if (!_me)
-    {
-        _me = new MonitorController();
-    }
-    return _me;
+    static MonitorController Instance;
+    return Instance;
 }
 
 MonitorController::MonitorController(QObject *parent)
     :QObject(parent),
-      _onTimer(this),
-      _offTimer(this)
+      m_onTimer(this),
+      m_offTimer(this)
 {
-    _onTimer.callOnTimeout(this, [this]{
-        enableDisplay(true);
+    m_onTimer.callOnTimeout(this, [this]{
+        EnableDisplay(true);
     });
-    _offTimer.callOnTimeout(this, [this]{
-        enableDisplay(false);
+    m_offTimer.callOnTimeout(this, [this]{
+        EnableDisplay(false);
     });
-    connect(ConfigFile::getInstance(), &ConfigFile::fileModified, [=](){
-        initTimer();
+    connect(&ConfigFile::GetInstance(), &ConfigFile::fileModified, this, [=](){
+        InitTimer();
     });
-    initTimer();
+    InitTimer();
 }
 
-void MonitorController::enableDisplay(bool enable)
+void MonitorController::EnableDisplay(bool enable)
 {
     if (auto_powder_down)
     {
@@ -70,7 +65,7 @@ void MonitorController::enableDisplay(bool enable)
     }
 }
 
-void MonitorController::initTimer()
+void MonitorController::InitTimer()
 {
     // init Settings
     QString settings_file_path = ConfigFile::FILE_PATH;
@@ -78,8 +73,11 @@ void MonitorController::initTimer()
     settings.sync();
     settings.beginGroup("MonitorControl");
     QString on_time_str = settings.value("MonitorControl.switch_on_time").toString();
+    qDebug() << "MonitorControl.switch_on_time " << on_time_str;
     QString off_time_str = settings.value("MonitorControl.switch_off_time").toString();
+    qDebug() << "MonitorControl.switch_off_time " << off_time_str;
     auto_powder_down = settings.value("MonitorControl.auto_power_down").toBool();
+    qDebug() << "MonitorControl.auto_power_down " << auto_powder_down;
     settings.endGroup();
 
     //Initialize Timer
@@ -93,8 +91,8 @@ void MonitorController::initTimer()
     int diff = QDateTime::currentDateTime().msecsTo(off_time);
     qDebug() << diff;
     QTimer::singleShot(diff, [this](){
-       enableDisplay(false);
-       _offTimer.start(86400000);
+       EnableDisplay(false);
+       m_offTimer.start(86400000);
     });
 
     setTime = QTime::fromString(on_time_str, "hh:mm");
@@ -107,8 +105,8 @@ void MonitorController::initTimer()
     diff = QDateTime::currentDateTime().msecsTo(on_time);
     qDebug() << diff;
     QTimer::singleShot(diff, [this](){
-        enableDisplay(true);
-       _onTimer.start(86400000);
+        EnableDisplay(true);
+       m_onTimer.start(86400000);
     });
 
 }

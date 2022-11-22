@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <QFileSystemWatcher>
 #include <QTimer>
 
@@ -6,9 +6,8 @@ class ConfigFile: public QObject
 {
     Q_OBJECT
 public:
-    static ConfigFile* getInstance();
+    static ConfigFile& GetInstance();
     static QString FILE_PATH;
-
 
 signals:
    void fileModified();
@@ -17,7 +16,8 @@ private:
    ~ConfigFile() = default;
    ConfigFile(const ConfigFile&)= delete;
    ConfigFile& operator=(const ConfigFile&)= delete;
-   static ConfigFile* _me;
+
+   QFileSystemWatcher m_oConfigFileWatcher;
 
 };
 
@@ -25,7 +25,7 @@ class MonitorController : public QObject
 {
     Q_OBJECT
 public:
-   static MonitorController* getInstance();
+   static MonitorController& GetInstance();
 
 signals:
    void stateChanged(bool enable);
@@ -35,9 +35,9 @@ private:
     ~MonitorController() = default;
     MonitorController(const MonitorController&)= delete;
     MonitorController& operator=(const MonitorController&)= delete;
-    static MonitorController* _me;
-    QTimer _onTimer;
-    QTimer _offTimer;
-    void enableDisplay(bool enable);
-    void initTimer();
+
+    QTimer m_onTimer;
+    QTimer m_offTimer;
+    void EnableDisplay(bool enable);
+    void InitTimer();
 };

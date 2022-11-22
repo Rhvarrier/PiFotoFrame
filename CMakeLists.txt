@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14)
+﻿cmake_minimum_required(VERSION 3.14)
 
 project(PiFotoFrame LANGUAGES CXX)
 
@@ -10,6 +10,8 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_TOOLCHAIN_FILE $ENV{TOOLCHAIN_FILE})
 
 set(Qt5_DIR $ENV{QT_CMAKE_DIR}/Qt5)
 find_package(QT NAMES Qt5)
@@ -27,3 +29,14 @@ add_executable(${CMAKE_PROJECT_NAME}
 )
 target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC src/)
 target_link_libraries(${CMAKE_PROJECT_NAME} Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+
+
+set(INSTALL_DESTDIR "/home/pi/")
+
+install(TARGETS ${CMAKE_PROJECT_NAME}
+    RUNTIME DESTINATION "${INSTALL_DESTDIR}"
+    BUNDLE DESTINATION "${INSTALL_DESTDIR}"
+    LIBRARY DESTINATION "${INSTALL_DESTDIR}"
+)
+
+

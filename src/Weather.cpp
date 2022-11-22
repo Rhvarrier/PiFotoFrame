@@ -1,4 +1,4 @@
-#include <Weather.hpp>
+﻿#include <Weather.hpp>
 #include <Globals.hpp>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -56,13 +56,13 @@ Weather::Weather()
     initProperties();
     initLocation();
     initTimer();
-    connect(ConfigFile::getInstance(), &ConfigFile::fileModified, [=]()
+    connect(&ConfigFile::GetInstance(), &ConfigFile::fileModified, [=]()
     {
         initProperties();
         initLocation();
         initTimer();
     });
-    connect(MonitorController::getInstance(), &MonitorController::stateChanged, [=](bool enable)
+    connect(&MonitorController::GetInstance(), &MonitorController::stateChanged, [=](bool enable)
     {
         onStandby(!enable);
     });
@@ -144,6 +144,7 @@ void Weather::handleLocationNetworkData(QNetworkReply *networkReply)
             if (obj.contains(QStringLiteral("city"))) {
                 City = obj.value(QStringLiteral("city")).toString();
             }
+            qDebug() << City;
             emit cityUpdated();
             updateWeather();
         }
